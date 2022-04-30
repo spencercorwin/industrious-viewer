@@ -5,6 +5,7 @@ import ClassInfo from "./ClassInfo";
 import Loading from "./Loading";
 import LoadError from "./LoadError";
 import LastRefreshDate from "./LastRefreshDate";
+import RefreshFailed from "./RefreshFailed";
 
 interface LoadDataResult {
   readonly success: boolean;
@@ -17,8 +18,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [lastRefreshDate, setLastRefreshDate] = useState<Date | undefined>(); // TODO: grab from state on app load
+  const [lastRefreshDate, setLastRefreshDate] = useState<Date | undefined>();
   const [refreshing, setRefreshing] = useState(false);
+  const [refreshFailed, setRefreshFailed] = useState(false);
 
   const loadData = async (): Promise<LoadDataResult> => {
     try {
@@ -37,10 +39,12 @@ export default function App() {
   const onRefresh = useCallback(async () => {
     console.log("Attempting refresh");
     const { success, data } = await loadData();
+    setRefreshFailed(false);
     if (success) {
       setLastRefreshDate(new Date());
       setResponse(data);
     } else {
+      setRefreshFailed(true);
       console.log("Refresh failed");
     }
     setRefreshing(false);
@@ -52,6 +56,7 @@ export default function App() {
       const { success, data, error } = await loadData();
       setIsLoading(false);
       if (success) {
+        setRefreshFailed(false);
         setLastRefreshDate(new Date());
         setResponse(data);
       } else {
@@ -68,6 +73,7 @@ export default function App() {
   ) : (
     <View style={styles.container}>
       <LastRefreshDate date={lastRefreshDate} />
+      {refreshFailed ? <RefreshFailed /> : <></>}
       <FlatList
         data={response}
         renderItem={({ item }) => <ClassInfo data={item} />}
