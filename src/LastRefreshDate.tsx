@@ -14,7 +14,7 @@ export default function LastRefreshDate({ date }: Props) {
   };
   return (
     <Text style={styles.text}>
-      Last Refreshed: {date?.toLocaleDateString("en-US", options) ?? "never"}
+      Last Refreshed: {date?.toLocaleDateString("en-US", options) ?? "Never"}
     </Text>
   );
 }

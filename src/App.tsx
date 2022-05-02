@@ -2,15 +2,22 @@ import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
 import { useEffect, useState, useCallback } from "react";
 import { ResultData, scrape } from "./utils";
 import ClassInfo from "./ClassInfo";
-import Loading from "./Loading";
-import LoadError from "./LoadError";
+import ErrorView from "./ErrorView";
 import LastRefreshDate from "./LastRefreshDate";
 import RefreshFailed from "./RefreshFailed";
+import {
+  Appbar,
+  Button,
+  DefaultTheme,
+  Provider as PaperProvider,
+} from "react-native-paper";
+import AppLoadingView from "./AppLoadView";
+import DonateButton from "./DonateButton";
 
 interface LoadDataResult {
   readonly success: boolean;
   readonly data: ResultData[];
-  readonly error?: any;
+  readonly error?: string;
 }
 
 export default function App() {
@@ -37,7 +44,6 @@ export default function App() {
   };
 
   const onRefresh = useCallback(async () => {
-    console.log("Attempting refresh");
     const { success, data } = await loadData();
     setRefreshFailed(false);
     if (success) {
@@ -45,7 +51,6 @@ export default function App() {
       setResponse(data);
     } else {
       setRefreshFailed(true);
-      console.log("Refresh failed");
     }
     setRefreshing(false);
   }, []);
@@ -54,35 +59,44 @@ export default function App() {
     (async () => {
       setIsLoading(true);
       const { success, data, error } = await loadData();
-      setIsLoading(false);
       if (success) {
         setRefreshFailed(false);
         setLastRefreshDate(new Date());
         setResponse(data);
       } else {
-        setErrorMessage(error);
+        setErrorMessage(error as string);
         setIsError(true);
       }
+      setIsLoading(false);
     })();
   }, []);
 
-  return isLoading ? (
-    <Loading />
-  ) : isError ? (
-    <LoadError message={errorMessage} />
-  ) : (
-    <View style={styles.container}>
-      <LastRefreshDate date={lastRefreshDate} />
-      {refreshFailed ? <RefreshFailed /> : <></>}
-      <FlatList
-        data={response}
-        renderItem={({ item }) => <ClassInfo data={item} />}
-        keyExtractor={({ dateRaw }) => dateRaw}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      />
-    </View>
+  const theme = {
+    ...DefaultTheme,
+  };
+
+  return (
+    <PaperProvider theme={theme}>
+      {isLoading ? (
+        <AppLoadingView />
+      ) : isError ? (
+        <ErrorView message={errorMessage} />
+      ) : (
+        <View style={styles.container}>
+          <LastRefreshDate date={lastRefreshDate} />
+          {refreshFailed ? <RefreshFailed /> : <></>}
+          <FlatList
+            data={response}
+            renderItem={({ item }) => <ClassInfo data={item} />}
+            keyExtractor={({ dateRaw }) => dateRaw}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          />
+        </View>
+      )}
+      <DonateButton />
+    </PaperProvider>
   );
 }
 

@@ -1,5 +1,5 @@
-import { StyleSheet, Text } from "react-native";
 import { ResultData } from "./utils";
+import { StyleSheet, Text } from "react-native";
 
 interface Props {
   readonly data: ResultData;
@@ -10,7 +10,6 @@ export default function ClassInfo({ data }: Props) {
   const available = data?.available ?? 0;
   const taken = available - open;
   const takenText = `${taken} of ${available} taken`;
-  const openText = `${open} of ${available} open`;
   const options: Intl.DateTimeFormatOptions = {
     weekday: "short",
     month: "short",
@@ -18,19 +17,15 @@ export default function ClassInfo({ data }: Props) {
     hour: "2-digit",
     minute: "2-digit",
   };
+  const title = `${data.date.toLocaleDateString("en-US", options)} -${" "} ${
+    data.isFull ? "Full" : takenText
+  }`;
 
-  return (
-    <>
-      <Text style={styles.dateStyle}>
-        {data.date.toLocaleDateString("en-US", options)} -{" "}
-        {data.isFull ? "Full" : takenText}
-      </Text>
-    </>
-  );
+  return <Text style={styles.container}>{title}</Text>;
 }
 
 const styles = StyleSheet.create({
-  dateStyle: {
-    margin: 10,
+  container: {
+    marginTop: 5,
   },
 });
