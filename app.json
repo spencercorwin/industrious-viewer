@@ -2,13 +2,14 @@
   "expo": {
     "name": "Industrious Viewer",
     "slug": "industrious-viewer",
+    "owner": "spencercorwin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iv.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/iv.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,16 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.spencercorwin.industriousviewer"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/iv.png",
+        "backgroundColor": "#000000"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/iv.png"
     }
   }
 }

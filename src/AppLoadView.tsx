@@ -6,11 +6,7 @@ interface Props {}
 export default function AppLoadingView(_props: Props) {
   return (
     <View style={styles.container}>
-      <ActivityIndicator
-        size="large"
-        animating={true}
-        color={Colors.purple800}
-      />
+      <ActivityIndicator size="large" animating={true} color={Colors.black} />
     </View>
   );
 }
