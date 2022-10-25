@@ -28,7 +28,8 @@
       }
     },
     "web": {
-      "favicon": "./assets/iv.png"
+      "favicon": "./assets/iv.png",
+      "startUrl": "https://spencercorwin.io/industrious-viewer"
     }
   }
 }
