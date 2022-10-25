@@ -1,0 +1,23 @@
+{
+  "files": {
+    "app.js": "/industrious-viewer/static/js/app.7a06f492.chunk.js",
+    "app.js.map": "/industrious-viewer/static/js/app.7a06f492.chunk.js.map",
+    "runtime~app.js": "/industrious-viewer/static/js/runtime~app.83010e69.js",
+    "runtime~app.js.map": "/industrious-viewer/static/js/runtime~app.83010e69.js.map",
+    "static/js/2.49af8183.chunk.js": "/industrious-viewer/static/js/2.49af8183.chunk.js",
+    "static/js/2.49af8183.chunk.js.map": "/industrious-viewer/static/js/2.49af8183.chunk.js.map",
+    "fonts/MaterialCommunityIcons.ttf": "/industrious-viewer/./fonts/MaterialCommunityIcons.ttf",
+    "favicon-16.png": "/industrious-viewer/favicon-16.png",
+    "favicon-32.png": "/industrious-viewer/favicon-32.png",
+    "favicon.ico": "/industrious-viewer/favicon.ico",
+    "index.html": "/industrious-viewer/index.html",
+    "manifest.json": "/industrious-viewer/manifest.json",
+    "serve.json": "/industrious-viewer/serve.json",
+    "static/js/2.49af8183.chunk.js.LICENSE.txt": "/industrious-viewer/static/js/2.49af8183.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.83010e69.js",
+    "static/js/2.49af8183.chunk.js",
+    "static/js/app.7a06f492.chunk.js"
+  ]
+}
