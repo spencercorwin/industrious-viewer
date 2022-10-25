@@ -4,7 +4,7 @@
   "lang": "en",
   "name": "Industrious Viewer",
   "short_name": "Industrious Viewer",
-  "start_url": "/?utm_source=web_app_manifest",
+  "start_url": "https://spencercorwin.io/industrious-viewer",
   "orientation": "portrait",
   "related_applications": [
     {
